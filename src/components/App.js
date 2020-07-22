@@ -74,7 +74,7 @@ function App() {
     }
 
     return (
-        <body>
+        <>
         <div className="page">
             <Header/>
             <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
@@ -96,7 +96,7 @@ function App() {
             <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} image={dataImage}/>
         </div>
 
-        </body>
+        </>
     );
 }
 

@@ -19,7 +19,7 @@ function InformationPopup() {
                     id="name-input"
                     required
                     pattern="^[A-Za-zА-Яа-я\s-]+$"
-                    value="Имя"
+                    defaultValue="Имя"
                     minLength="2"
                     maxLength="40"
                 />
@@ -35,7 +35,7 @@ function InformationPopup() {
                     pattern="^[A-Za-zА-Яа-я\s-]+$"
                     minLength="2"
                     maxLength="200"
-                    value="Профессия"
+                    defaultValue="Профессия"
                 />
             </fieldset>
             <span id="profession-error" className="form__error"></span>

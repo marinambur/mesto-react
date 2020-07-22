@@ -8,6 +8,7 @@
     border-radius: 2px;
     margin-bottom: 36px;
     outline: none;
+    margin-left: 36px;
 }
 
 .form__save:hover {
@@ -22,5 +23,6 @@
         margin: auto;
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 20px;
     }
 }
