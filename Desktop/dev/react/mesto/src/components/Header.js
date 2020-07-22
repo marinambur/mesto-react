@@ -1,0 +1,20 @@
+
+import React from 'react';
+import logo from '../images/logo.svg';
+import './blocks/header/header.css';
+
+function Header() {
+    return (
+        <header className="header">
+            <a className="header__container" href="#"
+            ><img
+                className="header__logo"
+                src={logo}
+                alt="Логотип Россия"
+            />
+            </a>
+        </header>
+    );
+}
+
+export default Header;
