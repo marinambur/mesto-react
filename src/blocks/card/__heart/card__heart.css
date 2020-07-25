@@ -1,6 +1,6 @@
 .card__heart {
     border: none;
-    background: url(../../../../images/heart.svg) center no-repeat;
+    background: url(../../../images/heart.svg) center no-repeat;
     background-size: 100%;
     cursor: pointer;
     height: 19px;

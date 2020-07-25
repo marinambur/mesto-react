@@ -1,7 +1,7 @@
 @import url(_invisible/card__delete_invisible.css);
 .card__delete {
     border: none;
-    background: url(../../../../images/Trash.svg) center no-repeat;
+    background: url(../../../images/Trash.svg) center no-repeat;
     background-size: 100%;
     cursor: pointer;
     height: 20px;
