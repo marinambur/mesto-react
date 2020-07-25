@@ -1,7 +1,8 @@
 .popup__item {
-    height: 100%;
-    width: fit-content;
+    max-width: 75vw;
+    max-height: 75vh;
 }
+
 
 @media (max-width: 1070px) {
     .popup__item {

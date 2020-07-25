@@ -1,5 +1,4 @@
 import React from 'react';
-import './blocks/text-form/text-form.css';
 
 function AvatarPopup() {
     return (

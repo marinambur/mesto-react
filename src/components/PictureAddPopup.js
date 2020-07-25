@@ -1,5 +1,4 @@
 import React from 'react';
-import './blocks/form/form.css';
 
 function PictureAddPopup() {
     return (

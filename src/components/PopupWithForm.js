@@ -1,6 +1,4 @@
 import React from 'react';
-import './blocks/popup/popup.css';
-import './blocks/form/form.css';
 import cross from '../images/crest.svg';
 
 function PopupWithForm(props) {
@@ -12,7 +10,7 @@ function PopupWithForm(props) {
                 </button>
                 <h2 className="form__heading">{props.title}</h2>
                 {props.children}
-                <button type="submit" className="form__save">Сохранить</button>
+                <button type="submit" className="form__save">{props.buttonText}</button>
 
             </div>
         </section>

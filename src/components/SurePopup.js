@@ -1,5 +1,4 @@
 import React from "react";
-import './blocks/popup/popup.css';
 
 function SurePopup() {
     return (
