@@ -8,7 +8,6 @@ import InformationPopup from "./InformationPopup.js";
 import AvatarPopup from "./AvatarPopup";
 import PictureAddPopup from "./PictureAddPopup";
 import ImagePopup from "./ImagePopup.js";
-import SurePopup from "./SurePopup";
 
 function App() {
 
@@ -59,7 +58,7 @@ function App() {
                                isOpen={isAddPlacePopupOpen} close={closeAllPopups}/>
                 <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'} children={<AvatarPopup/>}
                                isOpen={isEditAvatarPopupOpen} close={closeAllPopups}/>
-                <PopupWithForm name={'sure'} title={'Вы уверены?'} buttonText={'Да'} children={<SurePopup/>}/>
+                <PopupWithForm name={'sure'} title={'Вы уверены?'} buttonText={'Да'}/>
                 <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} image={dataImage}/>
             </div>
 
