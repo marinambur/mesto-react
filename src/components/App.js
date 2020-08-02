@@ -4,20 +4,18 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
 import PopupWithForm from "./PopupWithForm";
-import InformationPopup from "./InformationPopup.js";
-import AvatarPopup from "./AvatarPopup";
-import PictureAddPopup from "./PictureAddPopup";
 import ImagePopup from "./ImagePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import EditProfilePopup from "./EditProfilePopup.js";
-
-import Card from "./Card.js";
+import AddPlacePopup from "./AddPlacePopup.js";
 import api from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+
 
 function App() {
 
     const [currentUser, setCurrentUser] = React.useState({});
+    const [currentPlace, setCurrentPlace] = React.useState({});
     const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
@@ -97,20 +95,35 @@ function App() {
     }
 
     function handleUpdateUser(data) {
-        api.updateUserInfo(data.name, data.about).then((r) =>{ setCurrentUser(r); closeAllPopups() })
-
-            //console.log(data.name)
-           // .then((res) => {
-            //    console.log(res)
-              //  setCurrentUser(res);
-                //closeAllPopups();
-        //    })
+        api.updateUserInfo(data.name, data.about).then((r) => {
+            setCurrentUser(r);
+            closeAllPopups()
+        })
             .catch((err) => {
                 console.log(`Ошибка: ${err}`);
             })
-            //.finally(() => {
-            //    setText(false);
+    }
 
+    function handleUpdatePlace(data) {
+        api.addNewCard(data.name, data.link).then((r) => {
+            setCurrentPlace(r);
+            setCards([...cards, r]);
+            closeAllPopups()
+        })
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            })
+    }
+
+
+    function handleUpdateAvatar(data) {
+        api.setUserAvatar(data).then((r) => {
+            setCurrentUser(r);
+            closeAllPopups()
+        })
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            })
     }
 
 
@@ -122,28 +135,23 @@ function App() {
                     <Header/>
 
                     <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
-                          onEditAvatar={handleEditAvatarClick}
+                          onEditAvatar={handleEditAvatarClick} cards={cards}
+                          onCardLike={handleCardLike} onCardDelete={handleCardDelete} onCardClick={handleCardClick}
                     />
 
-                    <section className="grid">
-                        {cards && cards.map((card) => (
-                            <Card key={card._id} card={card} onCardClick={handleCardClick} onCardLike={handleCardLike}
-                                  onCardDelete={handleCardDelete}/>
-                        ))}
-                    </section>
-                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
-                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
-                    <PopupWithForm name={'picture-add'} title={'Новое место'}
-                                   children={<PictureAddPopup/>}
-                                   isOpen={isAddPlacePopupOpen} close={closeAllPopups}/>
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
+                                     onUpdateAvatar={handleUpdateAvatar}/>
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
+                                      onUpdateUser={handleUpdateUser}/>
+                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
+                                   onUpdatePlace={handleUpdatePlace}/>
+
                     <PopupWithForm name={'sure'} title={'Вы уверены?'} buttonText={'Да'}/>
                     <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} image={dataImage}/>
 
                     <Footer/>
                 </CurrentUserContext.Provider>
             </div>
-
-
         </>
     );
 }

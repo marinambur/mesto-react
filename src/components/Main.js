@@ -1,8 +1,7 @@
 import React from 'react';
 import plus from "../images/plus.svg";
-import Card from "./Card";
-import api from "../utils/Api.js"
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import Card from "./Card";
 
 
 function Main(props) {
@@ -28,7 +27,12 @@ function Main(props) {
                     <img onClick={props.onAddPlace} src={plus} alt="Плюс"/>
                 </button>
             </section>
-
+            <section className="grid">
+                {props.cards.map((card) => (
+                    <Card key={card._id} card={card} onCardCick={props.onCardClick} onCardLike={props.onCardLike}
+                          onCardDelete={props.onCardDelete}/>
+                ))}
+            </section>
 
         </>
     );
