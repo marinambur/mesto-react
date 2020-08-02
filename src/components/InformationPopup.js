@@ -1,6 +1,27 @@
 import React from 'react';
+import PopupWithForm from "./PopupWithForm";
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function InformationPopup() {
+
+    const [name, setName] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const currentUser = React.useContext(CurrentUserContext);
+
+
+    function handleNameChange(e) {
+        setName(e.target.value);
+    }
+
+    function handleDescriptionChange(e) {
+        setDescription(e.target.value);
+
+    }
+
+    React.useEffect(() => {
+        setName(currentUser.name);
+        setDescription(currentUser.about);
+    }, [currentUser]);
     return (
         <form
             className="form"
@@ -14,6 +35,7 @@ function InformationPopup() {
                 <input
                     className="text-form text-form_name"
                     type="text"
+                    value={name || '' }
                     name="name"
                     id="name-input"
                     required
@@ -21,6 +43,7 @@ function InformationPopup() {
                     defaultValue="Имя"
                     minLength="2"
                     maxLength="40"
+                    onChange={handleNameChange}
                 />
             </fieldset>
             <span id="name-input-error" className="form__error"></span>
@@ -29,15 +52,18 @@ function InformationPopup() {
                     className="text-form text-form_subject"
                     type="text"
                     name="link"
+                    value={description || '' }
                     id="profession"
                     required
                     pattern="^[A-Za-zА-Яа-я\s-]+$"
                     minLength="2"
                     maxLength="200"
                     defaultValue="Профессия"
+                    onChange={handleDescriptionChange}
                 />
             </fieldset>
             <span id="profession-error" className="form__error"></span>
+            <button type="submit"  className="form__save">Сохранить</button>
         </form>
     );
 }

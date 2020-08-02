@@ -4,10 +4,13 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
 import PopupWithForm from "./PopupWithForm";
-import EditProfilePopup from "./EditProfilePopup";
+import InformationPopup from "./InformationPopup.js";
 import AvatarPopup from "./AvatarPopup";
 import PictureAddPopup from "./PictureAddPopup";
 import ImagePopup from "./ImagePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup.js";
+import EditProfilePopup from "./EditProfilePopup.js";
+
 import Card from "./Card.js";
 import api from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -81,6 +84,7 @@ function App() {
         });
     }
 
+
     function handleCardDelete(card) {
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -92,6 +96,24 @@ function App() {
         });
     }
 
+    function handleUpdateUser(data) {
+        api.updateUserInfo(data.name, data.about).then((r) =>{ setCurrentUser(r); closeAllPopups() })
+
+            //console.log(data.name)
+           // .then((res) => {
+            //    console.log(res)
+              //  setCurrentUser(res);
+                //closeAllPopups();
+        //    })
+            .catch((err) => {
+                console.log(`Ошибка: ${err}`);
+            })
+            //.finally(() => {
+            //    setText(false);
+
+    }
+
+
     return (
         <>
 
@@ -102,19 +124,18 @@ function App() {
                     <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
                           onEditAvatar={handleEditAvatarClick}
                     />
+
                     <section className="grid">
                         {cards && cards.map((card) => (
                             <Card key={card._id} card={card} onCardClick={handleCardClick} onCardLike={handleCardLike}
                                   onCardDelete={handleCardDelete}/>
                         ))}
                     </section>
-                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
-                    <PopupWithForm name={'picture-add'} title={'Новое место'} buttonText={'Создать'}
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+                    <PopupWithForm name={'picture-add'} title={'Новое место'}
                                    children={<PictureAddPopup/>}
                                    isOpen={isAddPlacePopupOpen} close={closeAllPopups}/>
-                    <PopupWithForm name={'avatar'} title={'Обновить аватар'} buttonText={'Сохранить'}
-                                   children={<AvatarPopup/>}
-                                   isOpen={isEditAvatarPopupOpen} close={closeAllPopups}/>
                     <PopupWithForm name={'sure'} title={'Вы уверены?'} buttonText={'Да'}/>
                     <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} image={dataImage}/>
 
