@@ -1,4 +1,3 @@
-
 export const token = {
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-12',
     headers: {
@@ -25,7 +24,7 @@ class Api {
             });
     }
 
-   getInitialCards() {
+    getInitialCards() {
         return fetch(`${this.baseUrl}/cards`, {
             headers: this.headers,
         })
@@ -122,7 +121,7 @@ class Api {
                 method: 'PATCH',
                 headers: this.headers,
                 body: JSON.stringify({
-                    avatar: userAvatar
+                    avatar: `${userAvatar.avatar}`
                 })
             }
         )

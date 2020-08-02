@@ -2,6 +2,7 @@ import React from 'react';
 import cross from '../images/crest.svg';
 
 function PopupWithForm(props) {
+
     return (
         <section id={props.name} className={`popup ${props.isOpen && 'popup popup_opened'}`}>
             <div className="popup__container">
@@ -10,7 +11,7 @@ function PopupWithForm(props) {
                 </button>
                 <h2 className="form__heading">{props.title}</h2>
                 {props.children}
-                <button type="submit" className="form__save">{props.buttonText}</button>
+                <button type="submit" className="form__save" onClick={props.onSubmit}>Сохранить</button>
 
             </div>
         </section>
