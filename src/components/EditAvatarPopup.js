@@ -7,10 +7,9 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 function EditAvatarPopup(props) {
     const currentUser = React.useContext(CurrentUserContext);
     const avatarRef = React.useRef();
-    const [avatar, setAvatar] = React.useState('');
 
     React.useEffect(() => {
-        setAvatar(currentUser.avatar);
+        avatarRef.current.value = currentUser.avatar;
     }, [currentUser]);
 
     function handleSubmit(e) {
@@ -21,9 +20,6 @@ function EditAvatarPopup(props) {
         );
     }
 
-    function handleAvatarChange(e) {
-        setAvatar(e.target.value);
-    }
 
 
     return (
@@ -33,14 +29,12 @@ function EditAvatarPopup(props) {
                            <fieldset className="form__subject">
                                <input
                                    ref={avatarRef}
-                                   value={avatar || ''}
                                    className="text-form text-form_subject place-form_link text-form__avatar"
                                    type="url"
                                    name="link"
                                    id="link-avatar"
                                    required
                                    placeholder="Ссылка на картинку"
-                                   onChange={handleAvatarChange}
                                />
                            </fieldset>
                            <span id="link-avatar-error" className="form__error"></span>
