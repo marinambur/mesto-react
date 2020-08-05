@@ -1,30 +1,21 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
 function AddPlacePopup(props) {
-    const currentUser = React.useContext(CurrentUserContext);
     const inputName = React.useRef();
-    const [link, setLink] = React.useState('');
+    const inputLink = React.useRef();
 
-    React.useEffect(() => {
-        setLink(currentUser.link);
-    }, [currentUser]);
 
     function handleAddPlaceSubmit(e) {
         e.preventDefault();
         props.onUpdatePlace({
             name: inputName.current.value,
-            link: link
+            link: inputLink.current.value
         });
     }
 
 
-    function handleLinkChange(e) {
-        setLink(e.target.value);
-
-    }
 
     return (
         <PopupWithForm name={'picture-add'} title={'Новое место'} buttonText={'Сохранить'}
@@ -52,11 +43,11 @@ function AddPlacePopup(props) {
                                    className="text-form text-form_subject place-form_link"
                                    type="url"
                                    name="link"
-                                   value={link || ''}
+                                   defaultValue={''}
                                    id="link-place"
                                    required
                                    placeholder="Ссылка на картинку"
-                                   onChange={handleLinkChange}
+                                   ref={inputLink}
                                />
                            </fieldset>
                            <span id="link-place-error" className="form__error"></span>
